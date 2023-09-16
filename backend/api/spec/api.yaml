@@ -1,0 +1,89 @@
+swagger: '2.0'
+info:
+  title: Todo API
+  version: 0.0.1
+# host: 127.0.0.1:8080
+basePath: /todo
+
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /tasks:
+    get:
+      summary: 'Retrieve all stored tasks'
+      tags:
+        - 'Todo'
+      responses:
+        '200':
+          description: 'ok'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TaskResponse'
+        '500':
+          description: 'internal error'
+          schema:
+            $ref: '#/definitions/APIError'
+    post:
+      parameters:
+        - in: body
+          name: body
+          required: true
+          description: The task to store.
+          schema:
+            $ref: '#/definitions/TaskCreate'
+      summary: 'Store a task'
+      tags:
+        - 'Todo'
+      responses:
+        '201':
+          description: 'created'
+        '500':
+          description: 'internal error'
+          schema:
+            $ref: '#/definitions/APIError'
+  
+definitions:
+  APIError:
+    type: object
+    properties:
+      message:
+        type: string
+
+  TaskCreate:
+    type: 'object'
+    required:
+      - title
+    properties:
+      title:
+        type: string
+      detail:
+        type: string
+      priority:
+        type: string
+      dueAt:
+        type: string
+        format: date-time
+  
+  TaskResponse:
+    type: 'object'
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+      detail:
+        type: string
+      priority:
+        type: string
+      dueAt:
+        type: string
+        format: date-time
+      createdAt:
+        type: string
+        format: date-time
