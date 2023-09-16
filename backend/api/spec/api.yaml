@@ -48,6 +48,28 @@ paths:
           schema:
             $ref: '#/definitions/APIError'
   
+  /tasks/{id}:
+    parameters:
+      - name: id
+        type: integer
+        in: path
+        required: true
+    delete:
+      summary: 'Delete a task'
+      tags:
+        - 'Todo'
+      responses:
+        '204':
+          description: 'ok'
+        '404':
+          description: 'not found'
+          schema:
+            $ref: '#/definitions/APIError'
+        '500':
+          description: 'internal error'
+          schema:
+            $ref: '#/definitions/APIError'
+  
 definitions:
   APIError:
     type: object
