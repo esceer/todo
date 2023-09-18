@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
 :root {
     --navy-blue: #4044c9;
     --transparent-blue: rgba(64, 68, 201, 0.2);
+}
+
+* {
+    font-family: Lato, sans-serif;
 }
 
 body {
@@ -12,6 +18,7 @@ body {
 .container {
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 
 .container header h1 {
@@ -23,22 +30,28 @@ body {
     background-color: white;
     border-top-left-radius: 35px;
     display: flex;
-    height: 100vh;
+    flex: 1;
 }
 
 .content aside {
+    display: flex;
     flex: 3.5;
+    flex-direction: column;
     padding: 25px;
 }
 
+.content aside nav {
+    flex: 1;
+}
+
 .content main {
-    border-top-left-radius: 25px;
+    border-radius: 25px 10px 10px 10px;
     box-shadow: 0px 10px 20px var(--transparent-blue);
     display: flex;
-    flex-direction: column;
     flex: 6.5;
+    flex-direction: column;
     gap: 15px;
-    margin-top: 50px;
+    margin: 40px 15px 15px 25px;
     padding: 25px;
 }
 
@@ -61,10 +74,25 @@ body {
 .task button {
     background-color: var(--navy-blue);
     border: 0;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .del-btn {
     background-color: var(--navy-blue);
-    content: url(resources/bin-16.png);
+    content: url(resources/images/bin-16.png);
+}
+
+.new-todo button {
+    background-color: var(--navy-blue);
+    border: 0;
+    border-radius: 50%;
+    box-shadow: 0.2rem 0.5rem 1rem rgba(0, 0, 0, 0.4);
+    color: white;
+    cursor: pointer;
+    font-size: 4rem;
+    height: 4rem;
+    line-height: 2rem;
+    margin: 15px;
+    padding-bottom: 5px;
+    width: 4rem;
 }
