@@ -5,7 +5,7 @@ let tasks;
 setup();
 
 function setup() {
-    const addBtn = document.querySelector('.new-todo button');
+    const addBtn = document.querySelector('.button--task-create');
     addBtn.addEventListener('click', createTask);
     refreshTaskList();
 }
@@ -22,7 +22,7 @@ async function fetchTasks() {
 }
 
 function showTasks() {
-    const main = document.querySelector('.content main');
+    const main = document.querySelector('.tasks');
     main.replaceChildren()
     tasks.forEach(task => {
         let dueAt = task.DueAt;
@@ -36,11 +36,11 @@ function showTasks() {
 
 function createNewTaskElement(id, title, dueAt) {
     const taskE = createElement('div', 'task');
-    taskE.appendChild(createElement('span', 'title', title));
-    taskE.appendChild(createElement('span', 'due-at', dueAt));
+    taskE.appendChild(withTextContent(createElement('span', 'task__title'), title));
+    taskE.appendChild(withTextContent(createElement('span', 'task__due-at'), dueAt));
 
-    delBtn = createElement('button');
-    delBtn.appendChild(createElement('img', 'del-btn'));
+    delBtn = createElement('button', 'button');
+    delBtn.appendChild(createElement('img', 'button__img--task-delete'));
     delBtn.taskId = id;
     delBtn.addEventListener('click', deleteTask);
     taskE.appendChild(delBtn);
@@ -48,13 +48,17 @@ function createNewTaskElement(id, title, dueAt) {
     return taskE;
 }
 
-function createElement(tag, clazz, textContent) {
+function createElement(tag, ...classes) {
     const element = document.createElement(tag);
-    if (clazz) {
-        element.classList.add(clazz);
+    if (classes) {
+        classes.forEach(c => element.classList.add(c));
     }
-    if (textContent) {
-        element.appendChild(document.createTextNode(textContent));
+    return element;
+}
+
+function withTextContent(element, text) {
+    if (text) {
+        element.appendChild(document.createTextNode(text));
     }
     return element;
 }

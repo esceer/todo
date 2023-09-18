@@ -12,22 +12,20 @@
 </head>
 <body>
     <div class="container">
-        <header>
+        <header class="container__header">
             <h1>#Todo.o</h1>
         </header>
-        <div class="content">
-            <aside>
-                <nav>
+        <div class="container__content">
+            <aside class="sidebar">
+                <nav class="sidebar__nav">
                     <ul>
                         <li>Active</li>
                         <li>Complete</li>
                     </ul>
                 </nav>
-                <div class="new-todo">
-                    <button>+</button>
-                </div>
+                <button class="button button--round button--size-big button--task-create">+</button>
             </aside>
-            <main></main>
+            <main class="tasks"></main>
         </div>
     </div>
 </body>

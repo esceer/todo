@@ -21,30 +21,30 @@ body {
     height: 100vh;
 }
 
-.container header h1 {
+.container__header {
     color: aliceblue;
     margin-left: 40px;
 }
 
-.content {
+.container__content {
     background-color: white;
     border-top-left-radius: 35px;
     display: flex;
     flex: 1;
 }
 
-.content aside {
+.sidebar {
     display: flex;
     flex: 3.5;
     flex-direction: column;
     padding: 25px;
 }
 
-.content aside nav {
+.sidebar__nav {
     flex: 1;
 }
 
-.content main {
+.tasks {
     border-radius: 25px 10px 10px 10px;
     box-shadow: 0px 10px 20px var(--transparent-blue);
     display: flex;
@@ -63,36 +63,36 @@ body {
     padding: 10px;
 }
 
-.task .title {
+.task__title {
     flex: 1;
 }
 
-.task .due-at {
+.task__due-at {
     padding-right: 10px;
 }
 
-.task button {
+.button {
     background-color: var(--navy-blue);
     border: 0;
-    cursor: pointer;
-}
-
-.del-btn {
-    background-color: var(--navy-blue);
-    content: url(resources/images/bin-16.png);
-}
-
-.new-todo button {
-    background-color: var(--navy-blue);
-    border: 0;
-    border-radius: 50%;
-    box-shadow: 0.2rem 0.5rem 1rem rgba(0, 0, 0, 0.4);
     color: white;
     cursor: pointer;
+}
+
+.button--round {
+    border-radius: 50%;
+    box-shadow: 0.2rem 0.5rem 1rem rgba(0, 0, 0, 0.4);
+}
+
+.button--size-big {
     font-size: 4rem;
     height: 4rem;
     line-height: 2rem;
     margin: 15px;
     padding-bottom: 5px;
     width: 4rem;
+}
+
+.button__img--task-delete {
+    background-color: var(--navy-blue);
+    content: url(resources/images/bin-16.png);
 }
