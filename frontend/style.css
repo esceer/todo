@@ -1,0 +1,70 @@
+:root {
+    --navy-blue: #4044c9;
+    --transparent-blue: rgba(64, 68, 201, 0.2);
+}
+
+body {
+    background-color: var(--navy-blue);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.container header h1 {
+    color: aliceblue;
+    margin-left: 40px;
+}
+
+.content {
+    background-color: white;
+    border-top-left-radius: 35px;
+    display: flex;
+    height: 100vh;
+}
+
+.content aside {
+    flex: 3.5;
+    padding: 25px;
+}
+
+.content main {
+    border-top-left-radius: 25px;
+    box-shadow: 0px 10px 20px var(--transparent-blue);
+    display: flex;
+    flex-direction: column;
+    flex: 6.5;
+    gap: 15px;
+    margin-top: 50px;
+    padding: 25px;
+}
+
+.task {
+    background-color: var(--navy-blue);
+    border-radius: 2px;
+    color: white;
+    display: flex;
+    padding: 10px;
+}
+
+.task .title {
+    flex: 1;
+}
+
+.task .due-at {
+    padding-right: 10px;
+}
+
+.task button {
+    background-color: var(--navy-blue);
+    border: 0;
+    cursor:pointer;
+}
+
+.del-btn {
+    background-color: var(--navy-blue);
+    content: url(resources/bin-16.png);
+}
