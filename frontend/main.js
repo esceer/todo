@@ -71,7 +71,7 @@ function sortByPriority(a, b) {
 
 function showTasks() {
     const main = document.querySelector('.tasks');
-    main.replaceChildren()
+    main.replaceChildren();
     tasks.forEach(task => {
         let dueAt = task.dueAt ? new Date(task.dueAt) : task.dueAt;
         main.appendChild(
