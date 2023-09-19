@@ -9,8 +9,8 @@ import (
 type Task struct {
 	ID        common.Identifier
 	Title     string
-	Detail    string
-	Priority  string
-	DueAt     time.Time
-	CreatedAt time.Time
+	Detail    *string
+	Priority  *string
+	DueAt     *time.Time
+	CreatedAt *time.Time
 }

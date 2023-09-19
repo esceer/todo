@@ -13,7 +13,7 @@
 <body>
     <div class="container">
         <header class="container__header">
-            <h1>#Todo.o</h1>
+            <h1>#T o.d o</h1>
         </header>
         <div class="container__content">
             <aside class="sidebar">
@@ -23,10 +23,30 @@
                         <li>Complete</li>
                     </ul>
                 </nav>
-                <button class="button button--round button--size-big button--task-create">+</button>
+                <button class="button button--round button--size-big button--open-dialog">+</button>
             </aside>
             <main class="tasks"></main>
         </div>
     </div>
+    <dialog>
+        <div class="dialog__header">
+            <h2>New TODO</h2>
+            <button class="button--close">X</button>
+        </div>
+        <div class="dialog__body">
+            <form class="dialog__form">
+                <input type="text" name="title" placeholder="Title" required>
+                <textarea name="detail" placeholder="Details..."></textarea>
+                <label>Due date:</label>
+                <input type="datetime-local" name="dueAt">
+                <label>Priority:</label>
+                <label>Medium</label>
+                <input type="radio" name="priority" value="medium" checked>
+                <label>High</label>
+                <input type="radio" name="priority" value="high">
+                <button class="button--create-task" type="submit">Create</button>
+            </form>
+        </div>
+    </dialog>
 </body>
 </html>

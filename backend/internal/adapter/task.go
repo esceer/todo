@@ -1,7 +1,10 @@
 package adapter
 
 import (
+	"time"
+
 	apimodel "github.com/esceer/todo/backend/internal/api/model"
+	"github.com/esceer/todo/backend/internal/common"
 	dbmodel "github.com/esceer/todo/backend/internal/storage/model"
 )
 
@@ -9,26 +12,32 @@ func ApiToDb(apiModel *apimodel.TaskCreate) *dbmodel.Task {
 	if apiModel == nil {
 		return nil
 	}
-	return &dbmodel.Task{
+	dbModel := &dbmodel.Task{
 		Title:    apiModel.Title,
 		Detail:   apiModel.Detail,
 		Priority: apiModel.Priority,
-		DueAt:    apiModel.DueAt,
 	}
+	if apiModel.DueAt != nil {
+		dbModel.DueAt = (*time.Time)(apiModel.DueAt)
+	}
+	return dbModel
 }
 
 func DbToApi(dbModel *dbmodel.Task) *apimodel.TaskResponse {
 	if dbModel == nil {
 		return nil
 	}
-	return &apimodel.TaskResponse{
+	apiModel := &apimodel.TaskResponse{
 		ID:        dbModel.ID,
 		Title:     dbModel.Title,
 		Detail:    dbModel.Detail,
 		Priority:  dbModel.Priority,
-		DueAt:     dbModel.DueAt,
-		CreatedAt: dbModel.CreatedAt,
+		CreatedAt: *dbModel.CreatedAt,
 	}
+	if dbModel.DueAt != nil {
+		apiModel.DueAt = (*common.DateTimeShort)(dbModel.DueAt)
+	}
+	return apiModel
 }
 
 func DbSliceToApiSlice(dbModels []*dbmodel.Task) []*apimodel.TaskResponse {

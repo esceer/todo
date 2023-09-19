@@ -8,16 +8,16 @@ import (
 
 type TaskCreate struct {
 	Title    string
-	Detail   string
-	Priority string
-	DueAt    time.Time
+	Detail   *string
+	Priority *string
+	DueAt    *common.DateTimeShort
 }
 
 type TaskResponse struct {
-	ID        common.Identifier
-	Title     string
-	Detail    string
-	Priority  string
-	DueAt     time.Time
-	CreatedAt time.Time
+	ID        common.Identifier     `json:"id"`
+	Title     string                `json:"title"`
+	Detail    *string               `json:"detail,omitempty"`
+	Priority  *string               `json:"priority,omitempty"`
+	DueAt     *common.DateTimeShort `json:"dueAt,omitempty"`
+	CreatedAt time.Time             `json:"createdAt"`
 }
