@@ -60,10 +60,13 @@ function createElement(tag, ...classes) {
     return element;
 }
 
-function createInput(tag, type, name, ...classes) {
+function createCheckbox(tag, type, name, checked, ...classes) {
     const element = createElement(tag, ...classes);
     element.setAttribute("type", type);
     element.setAttribute("name", name);
+    if (checked) {
+        element.setAttribute("checked", "");
+    }
     return element;
 }
 

@@ -91,7 +91,7 @@ li {
     border-left: 5px solid red;
 }
 
-.task--completed {
+.task--completed-true {
     text-decoration: line-through;
 }
 
