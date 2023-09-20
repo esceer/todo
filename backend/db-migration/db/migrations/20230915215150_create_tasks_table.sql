@@ -10,4 +10,4 @@ CREATE TABLE tasks (
 
 
 -- migrate:down
-DROP TABLE tasks IF EXISTS safe;
+DROP TABLE IF EXISTS tasks;

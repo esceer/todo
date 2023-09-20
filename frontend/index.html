@@ -6,9 +6,10 @@
 
     <link rel="stylesheet" href="style.css">
     <script src="node_modules/axios/dist/axios.min.js" defer></script>
+    <script src="utils.js" defer></script>
     <script src="main.js" defer></script>
 
-    <title>Todo.o</title>
+    <title>#Todo</title>
 </head>
 <body>
     <div class="container">
@@ -19,8 +20,14 @@
             <aside class="sidebar">
                 <nav class="sidebar__nav">
                     <ul>
-                        <li>Active</li>
-                        <li>Complete</li>
+                        <li>
+                            <span class="sidebar__nav-item__label">Active</span>
+                            <span class="sidebar__nav-item__counter counter--active">0</span>
+                        </li>
+                        <li>
+                            <span class="sidebar__nav-item__label">Complete</span>
+                            <span class="sidebar__nav-item__counter counter--complete">0</span>
+                        </li>
                     </ul>
                 </nav>
                 <button class="button button--round button--size-big button--open-dialog">+</button>

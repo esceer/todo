@@ -15,6 +15,10 @@ body {
     padding: 0;
 }
 
+li {
+    list-style: none;
+}
+
 .screen-blurred {
     filter: blur(5px);
     position: absolute;
@@ -29,8 +33,8 @@ body {
 }
 
 .container__header {
+    align-self: center;
     color: aliceblue;
-    margin-left: 40px;
 }
 
 .container__content {
@@ -57,18 +61,20 @@ body {
     display: flex;
     flex: 6.5;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
     margin: 40px 15px 15px 25px;
     padding: 25px;
 }
 
 .task {
+    align-items: center;
     background-color: var(--navy-blue);
     border-left: 5px solid gold;
     border-radius: 2px;
     color: white;
     display: flex;
-    padding: 10px;
+    font-size: 1.1rem;
+    padding: 0.9rem;
 
     transition-property: box-shadow, margin-left, margin-right;
     transition-duration: 0.15s;
@@ -91,6 +97,39 @@ body {
 
 .task--due-already {
     color: red;
+}
+
+.task__checkbox {
+    appearance: none;
+    background-color: #fff;
+    margin-right: 1rem;
+
+    font: inherit;
+    color: currentColor;
+    width: 1em;
+    height: 1em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+
+    display: grid;
+    place-content: center;
+}
+
+.task__checkbox::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--navy-blue);
+
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.task__checkbox:checked::before {
+    transform: scale(1);
 }
 
 .task__title {
