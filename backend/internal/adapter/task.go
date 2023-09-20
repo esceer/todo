@@ -31,7 +31,7 @@ func DbToApi(dbModel *dbmodel.Task) *apimodel.TaskResponse {
 		ID:        dbModel.ID,
 		Title:     dbModel.Title,
 		Detail:    dbModel.Detail,
-		Completed: dbModel.Completed,
+		Completed: *dbModel.Completed,
 		Priority:  dbModel.Priority,
 		CreatedAt: *dbModel.CreatedAt,
 	}

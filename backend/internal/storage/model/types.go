@@ -11,7 +11,7 @@ type Task struct {
 	Title     string
 	Detail    *string
 	Priority  *string
-	Completed bool
+	Completed *bool `gorm:"default:false"`
 	DueAt     *time.Time
 	CreatedAt *time.Time
 }

@@ -39,7 +39,7 @@ func (s todoService) Patch(id common.Identifier, updates *apimodel.TaskUpdate) (
 		return nil, err
 	}
 	if updates.Completed != nil {
-		dbTask.Completed = *updates.Completed
+		dbTask.Completed = updates.Completed
 	}
 	dbTask, err = s.store.Update(dbTask)
 	if err != nil {
