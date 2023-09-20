@@ -4,11 +4,14 @@ import (
 	"github.com/esceer/todo/backend/internal/common"
 	"github.com/esceer/todo/backend/internal/storage/model"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 type TaskStore interface {
 	GetAll() ([]*model.Task, error)
-	Save(*model.Task) error
+	GetById(common.Identifier) (*model.Task, error)
+	Create(*model.Task) (*model.Task, error)
+	Update(task *model.Task) (*model.Task, error)
 	Delete(common.Identifier) error
 }
 
@@ -26,8 +29,25 @@ func (s *dbStore) GetAll() ([]*model.Task, error) {
 	return tasks, result.Error
 }
 
-func (s *dbStore) Save(task *model.Task) error {
-	return s.db.Save(task).Error
+func (s *dbStore) GetById(id common.Identifier) (*model.Task, error) {
+	var task model.Task
+	result := s.db.Preload(clause.Associations).First(&task, id)
+	if result.Error == gorm.ErrRecordNotFound {
+		return nil, ErrNotFound
+	}
+	return &task, result.Error
+}
+
+func (s *dbStore) Create(task *model.Task) (*model.Task, error) {
+	return task, s.db.Create(task).Error
+}
+
+func (c *dbStore) Update(task *model.Task) (*model.Task, error) {
+	if _, err := c.GetById(task.ID); err != nil {
+		return nil, err
+	}
+	result := c.db.Updates(task)
+	return task, result.Error
 }
 
 func (s *dbStore) Delete(id common.Identifier) error {

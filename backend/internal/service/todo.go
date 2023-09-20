@@ -9,7 +9,8 @@ import (
 
 type TodoService interface {
 	GetAll() ([]*apimodel.TaskResponse, error)
-	Save(*apimodel.TaskCreate) error
+	Create(*apimodel.TaskCreate) error
+	Patch(id common.Identifier, updates *apimodel.TaskUpdate) (*apimodel.TaskResponse, error)
 	Delete(common.Identifier) error
 }
 
@@ -26,9 +27,25 @@ func (s todoService) GetAll() ([]*apimodel.TaskResponse, error) {
 	return adapter.DbSliceToApiSlice(tasks), err
 }
 
-func (s todoService) Save(apiTask *apimodel.TaskCreate) error {
+func (s todoService) Create(apiTask *apimodel.TaskCreate) error {
 	dbTask := adapter.ApiToDb(apiTask)
-	return s.store.Save(dbTask)
+	_, err := s.store.Create(dbTask)
+	return err
+}
+
+func (s todoService) Patch(id common.Identifier, updates *apimodel.TaskUpdate) (*apimodel.TaskResponse, error) {
+	dbTask, err := s.store.GetById(id)
+	if err != nil {
+		return nil, err
+	}
+	if updates.Completed != nil {
+		dbTask.Completed = *updates.Completed
+	}
+	dbTask, err = s.store.Update(dbTask)
+	if err != nil {
+		return nil, err
+	}
+	return adapter.DbToApi(dbTask), nil
 }
 
 func (s todoService) Delete(id common.Identifier) error {

@@ -54,6 +54,32 @@ paths:
         type: integer
         in: path
         required: true
+    patch:
+      summary: 'Partially update a task'
+      tags:
+        - 'Todo'
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          description: The updated fields.
+          schema:
+            $ref: '#/definitions/TaskUpdate'
+      responses:
+        '200':
+          description: 'ok'
+          schema:
+            $ref: '#/definitions/TaskResponse'
+        '404':
+          description: 'not found'
+          schema:
+            $ref: '#/definitions/APIError'
+        '500':
+          description: 'internal error'
+          schema:
+            $ref: '#/definitions/APIError'
     delete:
       summary: 'Delete a task'
       tags:
@@ -61,10 +87,6 @@ paths:
       responses:
         '204':
           description: 'ok'
-        '404':
-          description: 'not found'
-          schema:
-            $ref: '#/definitions/APIError'
         '500':
           description: 'internal error'
           schema:
@@ -91,6 +113,12 @@ definitions:
       dueAt:
         type: string
         format: date-time
+
+  TaskUpdate:
+    type: 'object'
+    properties:
+      completed:
+        type: boolean
   
   TaskResponse:
     type: 'object'
@@ -103,6 +131,8 @@ definitions:
         type: string
       priority:
         type: string
+      completed:
+        type: boolean
       dueAt:
         type: string
         format: date-time

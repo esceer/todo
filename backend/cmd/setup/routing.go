@@ -20,6 +20,7 @@ func WebRouting(todoService service.TodoService) {
 	taskApi := api.NewTaskApiHandler(todoService)
 	cr.HandleFunc("", taskApi.GetAll).Methods("GET")
 	cr.HandleFunc("", taskApi.Create).Methods("POST")
+	cr.HandleFunc("/{id}", taskApi.Patch).Methods("PATCH")
 	cr.HandleFunc("/{id}", taskApi.Delete).Methods("DELETE")
 
 	http.Handle("/", withCorsSetup(withLogging(router)))
