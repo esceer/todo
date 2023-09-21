@@ -1,3 +1,5 @@
+let tasks;
+
 init();
 
 function init() {
@@ -10,17 +12,31 @@ function init() {
     const form = document.querySelector(".dialog__form");
     form.addEventListener("submit", onSubmit);
 
+    const activeNavItem = document.querySelector(".sidebar__nav-item--active");
+    activeNavItem.addEventListener("click", onFilterActiveTasks);
+
+    const completedNavItem = document.querySelector(".sidebar__nav-item--completed");
+    completedNavItem.addEventListener("click", onFilterCompletedTasks);
+
     refreshTaskList();
 }
 
 function refreshTaskList() {
-    refreshFilteredTaskList(tasks => tasks);
+    fetchTasks()
+        .then(fetched => {
+            tasks = fetched;
+            updateCounters();
+            onFilterActiveTasks();
+        })
+        .catch(err => console.error(err));
 }
 
-function refreshFilteredTaskList(filter) {
-    fetchTasks()
-        .then(ts => showTasks(filter(ts)))
-        .catch(err => console.error(err));
+function updateCounters() {
+    const activeCounter = document.querySelector(".counter--active");
+    activeCounter.textContent = tasks.filter(t => !t.completed).length;
+
+    const completedCounter = document.querySelector(".counter--completed");
+    completedCounter.textContent = tasks.filter(t => t.completed).length;
 }
 
 function showTasks(tasks) {
@@ -107,10 +123,30 @@ function onCompletionToggle(event) {
 
 function onTaskDelete(event) {
     const taskId = event.currentTarget.taskId;
-    refreshFilteredTaskList(
-        tasks => tasks.filter((t) => t.ID !== taskId)
-    );
     deleteTask(taskId)
         .then(() => refreshTaskList());
+}
 
+function onFilterActiveTasks() {
+    const navItems = document.querySelectorAll(".sidebar__nav-item__label");
+    navItems.forEach(item => {
+        item.classList.toggle("sidebar__nav-item--selected", false);
+    });
+
+    const activeNavItem = document.querySelector(".sidebar__nav-item--active .sidebar__nav-item__label");
+    activeNavItem.classList.toggle("sidebar__nav-item--selected", true);
+
+    showTasks(tasks.filter(t => !t.completed));
+}
+
+function onFilterCompletedTasks() {
+    const navItems = document.querySelectorAll(".sidebar__nav-item__label");
+    navItems.forEach(item => {
+        item.classList.toggle("sidebar__nav-item--selected", false);
+    });
+
+    const activeNavItem = document.querySelector(".sidebar__nav-item--completed .sidebar__nav-item__label");
+    activeNavItem.classList.toggle("sidebar__nav-item--selected", true);
+
+    showTasks(tasks.filter(t => t.completed));
 }

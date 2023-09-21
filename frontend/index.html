@@ -20,14 +20,20 @@
         <div class="container__content">
             <aside class="sidebar">
                 <nav class="sidebar__nav">
-                    <ul>
+                    <ul class="sidebar__nav__list">
                         <li>
-                            <span class="sidebar__nav-item__label">Active</span>
-                            <span class="sidebar__nav-item__counter counter--active">0</span>
+                            <div class="sidebar__nav-item sidebar__nav-item--active">
+                                <span class="sidebar__nav-item__label">Active</span>
+                                <div class="spacer"></div>
+                                <span class="sidebar__nav-item__counter counter--active">0</span>
+                            </div>
                         </li>
                         <li>
-                            <span class="sidebar__nav-item__label">Complete</span>
-                            <span class="sidebar__nav-item__counter counter--complete">0</span>
+                            <div class="sidebar__nav-item sidebar__nav-item--completed">
+                                <span class="sidebar__nav-item__label">Completed</span>
+                                <div class="spacer"></div>
+                                <span class="sidebar__nav-item__counter counter--completed">0</span>
+                            </div>
                         </li>
                     </ul>
                 </nav>
