@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="resources/images/favicon-16.png">
     <script src="node_modules/axios/dist/axios.min.js" defer></script>
     <script src="utils.js" defer></script>
     <script src="config.js" defer></script>
@@ -67,22 +68,16 @@
         <div class="toolbar details-dialog__toolbar">
             <button class="button button--round details-dialog__button-close">X</button>
         </div>
-        <div>
+        <div class="details-dialog__content">
             <div class="details-dialog__header">
                 <span class="details-dialog__title"></span>
             </div>
-            <div class="details-dialog__line">
-                <span class="details-dialog__labels">Priority:</span>
-                <span class="details-dialog__priority details-dialog__field--value"></span>
-            </div>
-            <div class="details-dialog__line">
-                <span class="details-dialog__labels">Due date:</span>
-                <span class="details-dialog__due-date details-dialog__field--value"></span>
-            </div>
-            <div class="details-dialog__line">
-                <span class="details-dialog__labels">Details:</span>
-                <span class="details-dialog__details details-dialog__field--value"></span>
-            </div>
+            <span class="details-dialog__labels">Priority:</span>
+            <span class="details-dialog__priority details-dialog__field--value"></span>
+            <span class="details-dialog__labels">Due date:</span>
+            <span class="details-dialog__due-date details-dialog__field--value"></span>
+            <span class="details-dialog__labels">Details:</span>
+            <span class="details-dialog__details details-dialog__field--value"></span>
         </div>
     </dialog>
 </body>

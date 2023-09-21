@@ -293,20 +293,21 @@ dialog {
     top: 0.5rem;
 }
 
+.details-dialog__content {
+    display: grid;
+    gap: 0.8rem;
+    grid-template-columns: 6.5rem 1fr;
+}
+
 .details-dialog__header {
     font-size: 1.7rem;
     font-weight: bold;
+    grid-column: 1 / -1;
     margin-bottom: 1.5rem;
-}
-
-.details-dialog__line {
-    display: flex;
-    line-height: 1.6rem;
 }
 
 .details-dialog__labels {
     font-weight: bold;
-    width: 6.5rem;
 }
 
 .details-dialog__field-value {
