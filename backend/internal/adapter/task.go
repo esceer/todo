@@ -14,7 +14,7 @@ func ApiToDb(apiModel *apimodel.TaskCreate) *dbmodel.Task {
 	}
 	dbModel := &dbmodel.Task{
 		Title:    apiModel.Title,
-		Detail:   apiModel.Detail,
+		Details:  apiModel.Details,
 		Priority: apiModel.Priority,
 	}
 	if apiModel.DueAt != nil {
@@ -30,7 +30,7 @@ func DbToApi(dbModel *dbmodel.Task) *apimodel.TaskResponse {
 	apiModel := &apimodel.TaskResponse{
 		ID:        dbModel.ID,
 		Title:     dbModel.Title,
-		Detail:    dbModel.Detail,
+		Details:   dbModel.Details,
 		Completed: *dbModel.Completed,
 		Priority:  dbModel.Priority,
 		CreatedAt: *dbModel.CreatedAt,

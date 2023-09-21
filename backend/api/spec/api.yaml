@@ -106,7 +106,7 @@ definitions:
     properties:
       title:
         type: string
-      detail:
+      details:
         type: string
       priority:
         type: string
@@ -127,7 +127,7 @@ definitions:
         type: integer
       title:
         type: string
-      detail:
+      details:
         type: string
       priority:
         type: string

@@ -2,7 +2,7 @@
 CREATE TABLE tasks (
     id integer primary key autoincrement, 
     title varchar(100) not null,
-    detail varchar(255),
+    details varchar(255),
     priority varchar(50),
     completed boolean not null,
     due_at datetime,

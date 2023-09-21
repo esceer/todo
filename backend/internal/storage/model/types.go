@@ -9,7 +9,7 @@ import (
 type Task struct {
 	ID        common.Identifier
 	Title     string
-	Detail    *string
+	Details   *string
 	Priority  *string
 	Completed *bool `gorm:"default:false"`
 	DueAt     *time.Time
