@@ -7,15 +7,16 @@
     <link rel="stylesheet" href="style.css">
     <script src="node_modules/axios/dist/axios.min.js" defer></script>
     <script src="utils.js" defer></script>
+    <script src="config.js" defer></script>
     <script src="clients.js" defer></script>
     <script src="main.js" defer></script>
 
-    <title>#Todo</title>
+    <title>Todo assistant</title>
 </head>
 <body>
     <div class="container">
         <header class="container__header">
-            <h1>#Todo</h1>
+            <h1>Your personal <span class="container__header__title">Todo</span> assistant</h1>
         </header>
         <div class="container__content">
             <aside class="sidebar">
@@ -37,18 +38,18 @@
                         </li>
                     </ul>
                 </nav>
-                <button class="button button--round button--size-big button--open-dialog">+</button>
+                <button class="button button--round button--size-big button--open-create-dialog">+</button>
             </aside>
             <main class="tasks"></main>
         </div>
     </div>
-    <dialog>
-        <div class="dialog__header">
+    <dialog class="create-dialog">
+        <div class="create-dialog__header">
             <h2>New TODO</h2>
-            <button class="button--close">X</button>
+            <button class="create-dialog__button-close">X</button>
         </div>
-        <div class="dialog__body">
-            <form class="dialog__form">
+        <div class="create-dialog__body">
+            <form class="create-dialog__form">
                 <input type="text" name="title" placeholder="Title" required>
                 <textarea name="detail" placeholder="Details..."></textarea>
                 <label>Due date:</label>
@@ -60,6 +61,26 @@
                 <input type="radio" name="priority" value="high">
                 <button class="button--create-task" type="submit">Create</button>
             </form>
+        </div>
+    </dialog>
+    <dialog class="details-dialog">
+        <div class="details-dialog__header">
+            <h2 class="details-dialog__header__title">##title</h2>
+            <button class="details-dialog__button-close">X</button>
+        </div>
+        <div class="details-dialog__body">
+            <div>
+                <span>Priority:</span>
+                <span>##priority</span>
+            </div>
+            <div>
+                <span>Due date:</span>
+                <span>##date</span>
+            </div>
+            <div>
+                <span>Details:</span>
+                <span>##details</span>
+            </div>
         </div>
     </dialog>
 </body>

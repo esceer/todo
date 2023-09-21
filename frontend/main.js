@@ -3,20 +3,29 @@ let tasks;
 init();
 
 function init() {
-    const openDialogBtn = document.querySelector(".button--open-dialog");
-    openDialogBtn.addEventListener("click", onDialogOpen);
+    document
+        .querySelector(".button--open-create-dialog")
+        .addEventListener("click", onCreateDialogOpen);
 
-    const closeBtn = document.querySelector(".button--close");
-    closeBtn.addEventListener("click", onDialogClose);
+    document
+        .querySelector(".create-dialog__button-close")
+        .addEventListener("click", onCreateDialogClose);
 
-    const form = document.querySelector(".dialog__form");
-    form.addEventListener("submit", onSubmit);
+    document
+        .querySelector(".details-dialog__button-close")
+        .addEventListener("click", onDetailsDialogClose);
 
-    const activeNavItem = document.querySelector(".sidebar__nav-item--active");
-    activeNavItem.addEventListener("click", onFilterActiveTasks);
+    document
+        .querySelector(".create-dialog__form")
+        .addEventListener("submit", onSubmit);
 
-    const completedNavItem = document.querySelector(".sidebar__nav-item--completed");
-    completedNavItem.addEventListener("click", onFilterCompletedTasks);
+    document
+        .querySelector(".sidebar__nav-item--active")
+        .addEventListener("click", onFilterActiveTasks);
+
+    document
+        .querySelector(".sidebar__nav-item--completed")
+        .addEventListener("click", onFilterCompletedTasks);
 
     refreshTaskList();
 }
@@ -61,8 +70,15 @@ function createNewTaskElement(id, title, priority, completed, dueAt) {
     taskE.appendChild(withTextContent(createElement("span", "task__title"), title));
     taskE.appendChild(withTextContent(createElement("span", "task__due-at", isDueAlready(dueAt) ? "task--due-already" : "task--due-in-future"), formatDate(dueAt)));
 
-    delBtn = createElement("button", "button");
-    delBtn.appendChild(createElement("img", "button__img--delete-task"));
+    // const detailsBtn = withTextContent(createElement("button", "task__button-details"), "Details");
+    const detailsBtn = createElement("button", "button");
+    detailsBtn.appendChild(createElement("img", "button__img", "button__img--task-details"));
+    detailsBtn.taskId = id;
+    detailsBtn.addEventListener("click", onDetailsDialogOpen);
+    taskE.appendChild(detailsBtn);
+
+    const delBtn = createElement("button", "button", "button");
+    delBtn.appendChild(createElement("img", "button__img", "button__img--delete-task"));
     delBtn.taskId = id;
     delBtn.addEventListener("click", onTaskDelete);
     taskE.appendChild(delBtn);
@@ -74,26 +90,34 @@ function createNewTaskElement(id, title, priority, completed, dueAt) {
     return taskE;
 }
 
-function openDialog() {
+function openDialog(selector) {
     const screen = document.querySelector(".container");
     screen.classList.toggle("screen-blurred", true);
-    const modal = document.querySelector("dialog");
+    const modal = document.querySelector(selector);
     modal.showModal();
 }
 
-function closeDialog() {
+function closeDialog(selector) {
     const screen = document.querySelector(".container");
     screen.classList.toggle("screen-blurred", false);
-    const modal = document.querySelector("dialog");
+    const modal = document.querySelector(selector);
     modal.close();
 }
 
-function onDialogOpen() {
-    openDialog();
+function onCreateDialogOpen() {
+    openDialog(".create-dialog");
 }
 
-function onDialogClose() {
-    closeDialog();
+function onCreateDialogClose() {
+    closeDialog(".create-dialog");
+}
+
+function onDetailsDialogOpen() {
+    openDialog(".details-dialog");
+}
+
+function onDetailsDialogClose() {
+    closeDialog(".details-dialog");
 }
 
 function onSubmit(event) {

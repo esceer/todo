@@ -1,7 +1,7 @@
 // const { default: axios } = require("axios");
 
 async function fetchTasks() {
-    const response = await axios.get("http://celosnext.com:8081/todo/tasks");
+    const response = await axios.get(API_URL);
     response.data.sort(sortByDateAndPriority);
     return response.data;
 }
@@ -20,7 +20,7 @@ async function createTask(title, detail, priority, dueAt) {
         newTask.dueAt = dueAt;
     }
 
-    await axios.post("http://celosnext.com:8081/todo/tasks", newTask)
+    await axios.post(API_URL, newTask)
         .catch(err => {
             console.error(err);
             throw err;
@@ -29,7 +29,7 @@ async function createTask(title, detail, priority, dueAt) {
 
 async function deleteTask(taskId) {
     if (confirm("Are you sure to delete this item?")) {
-        await axios.delete(`http://celosnext.com:8081/todo/tasks/${taskId}`)
+        await axios.delete(`${API_URL}/${taskId}`)
             .catch(err => {
                 console.error(err);
                 throw err;
@@ -42,7 +42,7 @@ async function toggleComplete(taskId, completed) {
         "completed": completed,
     };
 
-    await axios.patch(`http://celosnext.com:8081/todo/tasks/${taskId}`, updates)
+    await axios.patch(`${API_URL}/${taskId}`, updates)
         .catch(err => {
             console.error(err);
             throw err;

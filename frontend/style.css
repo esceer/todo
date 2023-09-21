@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 
 :root {
-    --base-background-color: white;
+    --base-background-color: rgb(246, 236, 228);
+    --base-foreground-color: whitesmoke;
     --light-blue: #a3a7e9;
     --navy-blue: #4044c9;
     --text-color: white;
@@ -40,6 +41,10 @@ li {
     color: var(--text-color);
 }
 
+.container__header__title {
+    color: red;
+}
+
 .container__content {
     background-color: var(--base-background-color);
     border-top-left-radius: 35px;
@@ -55,10 +60,13 @@ li {
 }
 
 .sidebar__nav__list {
+    background-color: var(--base-foreground-color) !important;
     border-bottom: 2px solid var(--navy-blue);
+    border-radius: 10px;
     box-shadow: 0px 20px 20px var(--transparent-blue);
     padding-left: 1rem;
     padding-right: 1rem;
+    padding-top: 0.1rem;
 }
 
 .sidebar__nav {
@@ -72,6 +80,10 @@ li {
     margin: 1.05rem;
 }
 
+.sidebar__nav-item:hover {
+    font-weight: 700;
+}
+
 .sidebar__nav-item--selected {
     border-left: 2px solid var(--light-blue);
     border-radius: 4px;
@@ -81,7 +93,9 @@ li {
 }
 
 .sidebar__nav-item__label {
+    align-items: center;
     color: var(--navy-blue);
+    display: flex;
     font-size: 1.2rem;
 }
 
@@ -103,6 +117,7 @@ li {
 }
 
 .tasks {
+    background-color: var(--base-foreground-color);
     border-radius: 25px 10px 10px 10px;
     box-shadow: 0px 10px 20px var(--transparent-blue);
     display: flex;
@@ -121,6 +136,7 @@ li {
     color: var(--text-color);
     display: flex;
     font-size: 1.2rem;
+    gap: 0.5rem;
     padding: 0.9rem;
 
     transition-property: box-shadow, margin-left, margin-right;
@@ -149,8 +165,10 @@ li {
 .task__checkbox {
     appearance: none;
     background-color: #fff;
+    display: grid;
     margin-right: 1rem;
     margin-top: 0.4rem;
+    place-content: center;
 
     font: inherit;
     color: currentColor;
@@ -159,9 +177,6 @@ li {
     border: 0.15em solid currentColor;
     border-radius: 0.15em;
     transform: translateY(-0.075em);
-
-    display: grid;
-    place-content: center;
 }
 
 .task__checkbox::before {
@@ -185,14 +200,17 @@ li {
 }
 
 .task__due-at {
-    padding-right: 10px;
+    margin-right: 1.5rem;
 }
 
 .button {
+    align-items: center;
     background-color: var(--navy-blue);
     border: 0;
     color: var(--text-color);
     cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
 }
 
 .button--round {
@@ -203,13 +221,19 @@ li {
 .button--size-big {
     font-size: 4rem;
     height: 4rem;
-    line-height: 2rem;
     margin: 15px;
     padding-bottom: 5px;
     width: 4rem;
 }
 
-.button__img--delete-task {
+.button__img--task-details {
     background-color: var(--navy-blue);
+    border: 0;
+    content: url(resources/images/info-18.png);
+    cursor: pointer;
+}
+
+.button__img--delete-task {
     content: url(resources/images/bin-16.png);
+    transform: scale(1.1 );
 }
