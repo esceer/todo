@@ -45,13 +45,13 @@
     </div>
     <dialog class="create-dialog">
         <div class="create-dialog__header">
-            <h2>New TODO</h2>
             <button class="create-dialog__button-close">X</button>
+            <h2>New TODO</h2>
         </div>
         <div class="create-dialog__body">
             <form class="create-dialog__form">
                 <input type="text" name="title" placeholder="Title" required>
-                <textarea name="detail" placeholder="Details..."></textarea>
+                <textarea name="details" placeholder="Details..."></textarea>
                 <label>Due date:</label>
                 <input type="datetime-local" name="dueAt">
                 <label>Priority:</label>
@@ -64,22 +64,24 @@
         </div>
     </dialog>
     <dialog class="details-dialog">
-        <div class="details-dialog__header">
-            <h2 class="details-dialog__header__title">##title</h2>
-            <button class="details-dialog__button-close">X</button>
+        <div class="toolbar details-dialog__toolbar">
+            <button class="button button--round details-dialog__button-close">X</button>
         </div>
-        <div class="details-dialog__body">
-            <div>
-                <span>Priority:</span>
-                <span>##priority</span>
+        <div>
+            <div class="details-dialog__header">
+                <span class="details-dialog__title"></span>
             </div>
-            <div>
-                <span>Due date:</span>
-                <span>##date</span>
+            <div class="details-dialog__line">
+                <span class="details-dialog__labels">Priority:</span>
+                <span class="details-dialog__priority details-dialog__field--value"></span>
             </div>
-            <div>
-                <span>Details:</span>
-                <span>##details</span>
+            <div class="details-dialog__line">
+                <span class="details-dialog__labels">Due date:</span>
+                <span class="details-dialog__due-date details-dialog__field--value"></span>
+            </div>
+            <div class="details-dialog__line">
+                <span class="details-dialog__labels">Details:</span>
+                <span class="details-dialog__details details-dialog__field--value"></span>
             </div>
         </div>
     </dialog>

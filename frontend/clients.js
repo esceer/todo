@@ -6,12 +6,12 @@ async function fetchTasks() {
     return response.data;
 }
 
-async function createTask(title, detail, priority, dueAt) {
+async function createTask(title, details, priority, dueAt) {
     let newTask = {
         "title": title,
     };
-    if (detail) {
-        newTask.detail = detail;
+    if (details) {
+        newTask.details = details;
     }
     if (priority) {
         newTask.priority = priority;

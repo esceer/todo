@@ -7,13 +7,21 @@ function init() {
         .querySelector(".button--open-create-dialog")
         .addEventListener("click", onCreateDialogOpen);
 
-    document
-        .querySelector(".create-dialog__button-close")
-        .addEventListener("click", onCreateDialogClose);
+    const createDialog = document.querySelector(".create-dialog__button-close");
+    createDialog.addEventListener("click", onCreateDialogClose);
+    window.addEventListener("keyup", function (e) {
+        if (e.key == "Escape") {
+            onCreateDialogClose();
+        }
+    });
 
-    document
-        .querySelector(".details-dialog__button-close")
-        .addEventListener("click", onDetailsDialogClose);
+    const detailsDialog = document.querySelector(".details-dialog__button-close");
+    detailsDialog.addEventListener("click", onDetailsDialogClose);
+    detailsDialog.addEventListener("keyup", function (e) {
+        if (e.key == "Escape") {
+            onDetailsDialogClose();
+        }
+    });
 
     document
         .querySelector(".create-dialog__form")
@@ -51,12 +59,16 @@ function updateCounters() {
 function showTasks(tasks) {
     const main = document.querySelector(".tasks");
     main.replaceChildren();
-    tasks.forEach(task => {
-        let dueAt = task.dueAt ? new Date(task.dueAt) : task.dueAt;
-        main.appendChild(
-            createNewTaskElement(task.id, task.title, task.priority, task.completed, dueAt)
-        );
-    });
+    if (tasks.length > 0) {
+        tasks.forEach(task => {
+            let dueAt = task.dueAt ? new Date(task.dueAt) : task.dueAt;
+            main.appendChild(
+                createNewTaskElement(task.id, task.title, task.priority, task.completed, dueAt)
+            );
+        });
+    } else {
+        main.appendChild(withTextContent(createElement("div", "tasks--placeholder"), "There are no tasks"));
+    }
 }
 
 function createNewTaskElement(id, title, priority, completed, dueAt) {
@@ -68,9 +80,8 @@ function createNewTaskElement(id, title, priority, completed, dueAt) {
     taskE.appendChild(checkbox);
 
     taskE.appendChild(withTextContent(createElement("span", "task__title"), title));
-    taskE.appendChild(withTextContent(createElement("span", "task__due-at", isDueAlready(dueAt) ? "task--due-already" : "task--due-in-future"), formatDate(dueAt)));
+    taskE.appendChild(withTextContent(createElement("span", "task__due-at", isDueAlready(dueAt) && !completed ? "task--due-already" : "task--due-in-future"), formatDate(dueAt)));
 
-    // const detailsBtn = withTextContent(createElement("button", "task__button-details"), "Details");
     const detailsBtn = createElement("button", "button");
     detailsBtn.appendChild(createElement("img", "button__img", "button__img--task-details"));
     detailsBtn.taskId = id;
@@ -112,25 +123,56 @@ function onCreateDialogClose() {
     closeDialog(".create-dialog");
 }
 
-function onDetailsDialogOpen() {
+function onDetailsDialogOpen(event) {
+    const task = findTaskById(event.currentTarget.taskId);
+    document.querySelector(".details-dialog__title").textContent = task.title;
+    document.querySelector(".details-dialog__priority").textContent = task.priority
+        .charAt(0).toUpperCase() + task.priority.slice(1);
+    document.querySelector(".details-dialog__due-date").textContent = task.dueAt
+        ? new Date(task.dueAt).toLocaleString("hu-HU")
+        : task.dueAt;
+    document.querySelector(".details-dialog__details").textContent = task.details;
+
+    const dialog = document.querySelector(".details-dialog");
+    switch (task.priority) {
+        case "high":
+            dialog.classList.toggle("dialog--priority-high", true);
+            dialog.classList.toggle("dialog--priority-medium", false);
+            break;
+        case "medium":
+            dialog.classList.toggle("dialog--priority-high", false);
+            dialog.classList.toggle("dialog--priority-medium", true);
+            break;
+        default:
+            dialog.classList.toggle("dialog--priority-high", false);
+            dialog.classList.toggle("dialog--priority-medium", false);
+            break;
+    }
+
     openDialog(".details-dialog");
 }
 
 function onDetailsDialogClose() {
     closeDialog(".details-dialog");
+    document.querySelector(".details-dialog").classList.toggle("dialog--priority-high", false);
+    document.querySelector(".details-dialog").classList.toggle("dialog--priority-medium", false);
+    document.querySelector(".details-dialog__title").textContent = "n/a";
+    document.querySelector(".details-dialog__priority").textContent = "";
+    document.querySelector(".details-dialog__due-date").textContent = "";
+    document.querySelector(".details-dialog__details").textContent = "";
 }
 
 function onSubmit(event) {
     event.preventDefault();
 
     const title = event.target.title.value;
-    const detail = event.target.detail.value;
+    const details = event.target.details.value;
     const priority = event.target.priority.value;
     const dueAt = event.target.dueAt.value;
 
-    createTask(title, detail, priority, dueAt)
+    createTask(title, details, priority, dueAt)
         .then(() => {
-            closeDialog();
+            closeDialog(".create-dialog");
             refreshTaskList();
         });
 
@@ -173,4 +215,8 @@ function onFilterCompletedTasks() {
     activeNavItem.classList.toggle("sidebar__nav-item--selected", true);
 
     showTasks(tasks.filter(t => t.completed));
+}
+
+function findTaskById(id) {
+    return tasks.find(t => t.id === id);
 }
