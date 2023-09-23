@@ -76,7 +76,7 @@ li {
 }
 
 .sidebar__nav-item:hover {
-    font-weight: 700;
+    font-weight: bold;
 }
 
 .sidebar__nav-item--selected {
@@ -84,7 +84,7 @@ li {
     border-radius: 4px;
     padding-left: 0.7rem;
     padding-right: 0.7rem;
-    font-weight: 700;
+    font-weight: bold;
 }
 
 .sidebar__nav-item__label {
@@ -256,6 +256,21 @@ li {
     transform: scale(1.1);
 }
 
+.button--create-task {
+    background-color: var(--navy-blue);
+    border: 0;
+    border-radius: 5px;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1.1rem;
+    letter-spacing: .05em;
+    padding: 0.5rem 1.5rem;
+}
+
+.create-dialog__button-close {
+    font-size: 1.3rem;
+}
+
 .screen-blurred {
     filter: blur(5px);
     position: absolute;
@@ -264,13 +279,19 @@ li {
 }
 
 dialog {
-    background-color: var(--navy-blue);
     border: 0;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.6);
+}
+
+.details-dialog {
+    background-color: var(--navy-blue);
     border-bottom: 1px solid white;
     border-radius: 5px;
     border-top: 1px solid white;
-    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.6);
     color: var(--text-color);
+    font-size: 1.2rem;
+    padding: 24px 24px 40px 24px;
+    max-width: 40rem;
 }
 
 .dialog--priority-high {
@@ -279,12 +300,6 @@ dialog {
 
 .dialog--priority-medium {
     border-top: 1px solid var(--medium-priority-color);
-}
-
-.details-dialog {
-    font-size: 1.2rem;
-    padding: 24px 24px 40px 24px;
-    max-width: 40rem;
 }
 
 .toolbar {
@@ -312,4 +327,97 @@ dialog {
 
 .details-dialog__field-value {
     word-wrap: break-word;
+}
+
+.create-dialog {
+    font-size: 1.2rem;
+    height: 27rem;
+    overflow: hidden;
+    padding: 0;
+    width: 50rem;
+}
+
+.create-dialog__toolbar {
+    background-color: var(--navy-blue);
+    color: var(--text-color);
+    display: flex;
+    font-size: 1.7rem;
+    justify-content: space-between;
+    padding: 0.5rem;
+}
+
+.create-dialog__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1.2rem 1.5rem;
+}
+
+.input__title {
+    border: 0;
+    font-size: 1.2rem;
+}
+
+.input__details {
+    border: 0;
+    font-size: 1.2rem;
+    height: 12rem;
+    resize: none;
+}
+
+.create-dialog__bottom-frame {
+    display: flex;
+    margin-top: -2rem;
+}
+
+.input__due-at {
+    background-color: transparent;
+    border: 1px solid #3ba395;
+    border-radius: 5px;
+    color: #3ba395;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 0.5rem;
+    text-transform: uppercase;
+}
+
+.input-group__priority input[type="radio"] {
+    position: relative;
+    left: 2.2rem;
+    height: 1px;
+    width: 1px;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+}
+
+.input__priority--label {
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 0.5rem;
+    text-transform: uppercase;
+    transition: all .3s;
+}
+
+.input__priority--label-medium {
+    border: 1px solid var(--medium-priority-color);
+    color: var(--medium-priority-color);
+}
+
+.input__priority--label-medium:hover {
+    background-color: var(--medium-priority-color);
+    color: var(--text-color);
+}
+
+.input__priority--label-high {
+    border: 1px solid var(--high-priority-color);
+    color: var(--high-priority-color);
+}
+
+.input__priority--label-high:hover {
+    background-color: var(--high-priority-color);
+    color: var(--text-color);
 }

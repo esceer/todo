@@ -45,24 +45,29 @@
         </div>
     </div>
     <dialog class="create-dialog">
-        <div class="create-dialog__header">
-            <button class="create-dialog__button-close">X</button>
-            <h2>New TODO</h2>
+        <div class="create-dialog__toolbar">
+            <span>Create a new Todo</span>
+            <button class="button create-dialog__button-close">X</button>
         </div>
-        <div class="create-dialog__body">
-            <form class="create-dialog__form">
-                <input type="text" name="title" placeholder="Title" required>
-                <textarea name="details" placeholder="Details..."></textarea>
+        <form class="create-dialog__form">
+            <input class="input__title" type="text" name="title" placeholder="Title" required>
+            <textarea class="input__details" name="details" placeholder="Details..."></textarea>
+            <div class="input-group__due-at">
                 <label>Due date:</label>
-                <input type="datetime-local" name="dueAt">
+                <input class="input__due-at" type="datetime-local" name="dueAt">
+            </div>
+            <div class="input-group__priority">
                 <label>Priority:</label>
-                <label>Medium</label>
-                <input type="radio" name="priority" value="medium" checked>
-                <label>High</label>
-                <input type="radio" name="priority" value="high">
+                <label class="input__priority--label input__priority--label-medium" for="create__priority__medium">Medium</label>
+                <input id="create__priority__medium" type="radio" name="priority" value="medium" checked>
+                <label class="input__priority--label input__priority--label-high" for="create__priority__high">High</label>
+                <input id="create__priority__high" type="radio" name="priority" value="high">
+            </div>
+            <div class="create-dialog__bottom-frame">
+                <div class="spacer"></div>
                 <button class="button--create-task" type="submit">Create</button>
-            </form>
-        </div>
+            </div>
+        </form>
     </dialog>
     <dialog class="details-dialog">
         <div class="toolbar details-dialog__toolbar">
